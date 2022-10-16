@@ -1,11 +1,11 @@
 from PIL import Image
 from Ruido import addruido
+from Ruido import criaruido
 import numpy as np
 
 
 class OcultarNoRuido:
-    def __init__(self, mensagem, senha, origem, ruido):
-        self._ruido = np.array(ruido)
+    def __init__(self, mensagem, senha, origem):
         self._path = origem
         self._mensagem = mensagem
         self._senha = senha
@@ -16,7 +16,7 @@ class OcultarNoRuido:
         self._tambin = format(self._msglen, "b")
         self._chmsgbin = ""  # definido quando a função_criaMensagemBinaria é chamada
         self._chshbin = ""  # definido quando a função_criaSenhaBinaria é chamada
-
+        self._ruido = np.array(criaruido(self._data, senha))
     def _criamensagembinaria(self):
         for c in bytearray(self._mensagem, "utf-8"):
             result = format(c, 'b')

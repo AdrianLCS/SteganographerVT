@@ -3,7 +3,7 @@ import numpy as np
 from Ruido import criaruido
 
 
-class Revelar:
+class RevelarDoRuido:
     def __init__(self, senha, origem, r, g, b):
         self._ruido = np.array([r, g, b])
         self.mensagem = ""

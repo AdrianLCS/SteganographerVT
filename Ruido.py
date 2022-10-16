@@ -71,5 +71,14 @@ def criaruido(i, senha):
     r = []
     g = []
     b = []
+    for i in range(tamanho):
+        r.append(int(random.gauss(0, 2)))
+
+    for i in range(tamanho):
+        g.append(int(random.gauss(0, 2)))
+
+    for i in range(tamanho):
+        b.append(int(random.gauss(0, 2)))
+
     ruido = np.array([r, g, b])
     return ruido

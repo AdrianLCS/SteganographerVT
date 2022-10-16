@@ -1,5 +1,4 @@
 from PIL import Image
-from Ruido import Ruido
 
 
 class Revelar:
@@ -14,9 +13,6 @@ class Revelar:
         self._chshbin = ""  # definido quando a função_criaSenhaBinaria é chamada
         self._tamanho = ""  # definido quando a função_revelaTamanho é chamada
 
-    #def _rmruido(self):
-        #self._data = Ruido().rmruido(im=self._data, senha=self._senha)
-
     def _criasenhabinaria(self):
         for c in bytearray(self._senha, "utf-8"):
             result = format(c, 'b')
@@ -26,12 +22,15 @@ class Revelar:
 
     def _revelatamanho(self):
         tamanhodamensage = ""
+        layercont = 0
         for j in range(self._w-32, self._w):
-            if self._data.getpixel((j, 0))[2] % 2 == 0:
+            if self._data.getpixel((j, 0))[layercont % 3] % 2 == 0:
                 tamanhodamensage = tamanhodamensage + "0"
             else:
                 tamanhodamensage = tamanhodamensage + "1"
+            layercont += 1
         self._tamanho = 8 * int(tamanhodamensage, 2)
+
 
     def _revelamensagem(self):
         mcont = 0
@@ -73,7 +72,6 @@ class Revelar:
             self.mensagem = self.mensagem + chr(int(mensagembinaria[i:i + 8], 2))
 
     def run(self):
-        #self._rmruido()
         self._criasenhabinaria()
         self._revelatamanho()
         self._revelamensagem()
